@@ -1,7 +1,6 @@
 import { ListingMap } from "@/components/ListingMap";
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Phone,
@@ -72,13 +71,11 @@ export default async function ListingPage({
       {/* Hero */}
       <div className="relative h-64 md:h-96 bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]">
         {photoUrl ? (
-          <Image
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
             src={photoUrl}
             alt={biz.name}
-            fill
-            className="object-cover opacity-70"
-            priority
-            sizes="100vw"
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
