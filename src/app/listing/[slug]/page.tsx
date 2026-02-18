@@ -63,8 +63,8 @@ export default async function ListingPage({
           <ChevronRight size={14} />
           {biz.category && (
             <>
-              <Link href={`/category/${biz.category.slug}`} className="hover:text-[var(--gold)]">
-                {biz.category.name}
+              <Link href={`/category/${"restaurants"}`} className="hover:text-[var(--gold)]">
+                {"View Category"}
               </Link>
               <ChevronRight size={14} />
             </>
@@ -101,7 +101,7 @@ export default async function ListingPage({
             {biz.area && (
               <div className="flex items-center gap-1 text-sm text-gray-300">
                 <MapPin size={14} className="text-[var(--gold)]" />
-                {biz.area.name}
+                {"Mallorca"}
               </div>
             )}
           </div>
@@ -244,10 +244,10 @@ export default async function ListingPage({
                   Category
                 </h3>
                 <Link
-                  href={`/category/${biz.category.slug}`}
+                  href={`/category/${"restaurants"}`}
                   className="text-sm text-[var(--gold)] hover:text-[var(--gold-dark)] font-medium"
                 >
-                  {biz.category.name}
+                  {"View Category"}
                 </Link>
               </div>
             )}
@@ -261,7 +261,7 @@ export default async function ListingPage({
                   href={`/area/${biz.area.slug}`}
                   className="text-sm text-[var(--gold)] hover:text-[var(--gold-dark)] font-medium"
                 >
-                  {biz.area.name}
+                  {"Mallorca"}
                 </Link>
               </div>
             )}

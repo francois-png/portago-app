@@ -115,7 +115,7 @@ export default async function SearchPage({
               <BusinessCard
                 key={biz.id}
                 business={biz}
-                areaName={biz.area?.name}
+                areaName={undefined}
                 photoUrl={biz.photos?.[0]}
               />
             ))}

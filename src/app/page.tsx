@@ -14,7 +14,7 @@ export default async function Home() {
     supabase.from("categories").select("*").order("sort_order"),
     supabase
       .from("businesses")
-      .select("*, area:areas(name)")
+      .select("*")
       .eq("status", "active")
       .order("rating", { ascending: false })
       .limit(6),
@@ -94,7 +94,7 @@ export default async function Home() {
               <BusinessCard
                 key={biz.id}
                 business={biz}
-                areaName={biz.area?.name}
+                areaName={undefined}
                 photoUrl={biz.photos?.[0]}
               />
             ))}
