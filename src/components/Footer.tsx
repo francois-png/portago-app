@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { WaitlistForm } from "./WaitlistForm";
 
 export function Footer() {
@@ -22,12 +21,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 mb-10">
           <div>
             <Link href="/" className="block mb-3">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/portago-logo-transparent.png"
                 alt="Portago"
-                width={120}
-                height={55}
-                className="h-[45px] w-auto brightness-0 invert"
+                className="h-[55px] w-auto brightness-0 invert"
               />
             </Link>
             <p className="text-sm leading-relaxed font-light">
@@ -39,7 +37,7 @@ export function Footer() {
             <h4 className="text-xs font-semibold tracking-[2px] uppercase text-[rgba(255,255,255,0.8)] mb-4">
               Discover
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-sm list-none p-0">
               <li><Link href="/category/restaurants" className="hover:text-[var(--gold)] transition-colors">Restaurants</Link></li>
               <li><Link href="/category/property" className="hover:text-[var(--gold)] transition-colors">Property</Link></li>
               <li><Link href="/category/wellness" className="hover:text-[var(--gold)] transition-colors">Wellness</Link></li>
@@ -52,21 +50,26 @@ export function Footer() {
             <h4 className="text-xs font-semibold tracking-[2px] uppercase text-[rgba(255,255,255,0.8)] mb-4">
               Areas
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-sm list-none p-0">
               <li><Link href="/area/palma" className="hover:text-[var(--gold)] transition-colors">Palma</Link></li>
-              <li><Link href="/area/deia" className="hover:text-[var(--gold)] transition-colors">Deia</Link></li>
-              <li><Link href="/area/soller" className="hover:text-[var(--gold)] transition-colors">Soller</Link></li>
-              <li><Link href="/area/pollenca" className="hover:text-[var(--gold)] transition-colors">Pollenca</Link></li>
+              <li><Link href="/area/deia" className="hover:text-[var(--gold)] transition-colors">Deià</Link></li>
+              <li><Link href="/area/soller" className="hover:text-[var(--gold)] transition-colors">Sóller</Link></li>
+              <li><Link href="/area/pollenca" className="hover:text-[var(--gold)] transition-colors">Pollença</Link></li>
+              <li><Link href="/area/alaro" className="hover:text-[var(--gold)] transition-colors">Alaró</Link></li>
+              <li><Link href="/search" className="hover:text-[var(--gold)] transition-colors">All Areas →</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-xs font-semibold tracking-[2px] uppercase text-[rgba(255,255,255,0.8)] mb-4">
               Company
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-sm list-none p-0">
               <li><Link href="/" className="hover:text-[var(--gold)] transition-colors">About</Link></li>
+              <li><Link href="/search" className="hover:text-[var(--gold)] transition-colors">Blog</Link></li>
+              <li><Link href="/search" className="hover:text-[var(--gold)] transition-colors">AI Concierge</Link></li>
               <li><Link href="/list-your-business" className="hover:text-[var(--gold)] transition-colors">List Your Business</Link></li>
-              <li><Link href="/search" className="hover:text-[var(--gold)] transition-colors">Search</Link></li>
+              <li><Link href="/search" className="hover:text-[var(--gold)] transition-colors">Advertise</Link></li>
+              <li><Link href="/search" className="hover:text-[var(--gold)] transition-colors">Contact</Link></li>
             </ul>
           </div>
         </div>

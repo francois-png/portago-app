@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { Rating } from "./Rating";
 import type { Business } from "@/lib/types";
@@ -22,12 +21,11 @@ export function BusinessCard({
     >
       <div className="relative h-[220px] overflow-hidden">
         {imgSrc ? (
-          <Image
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
             src={imgSrc}
             alt={business.name}
-            fill
-            className="object-cover group-hover:scale-[1.06] transition-transform duration-[600ms]"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-[600ms]"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]">
