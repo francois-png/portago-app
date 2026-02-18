@@ -30,8 +30,8 @@ export function BusinessCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[var(--sand)]">
-            <span className="text-5xl font-[family-name:var(--font-playfair)] text-[var(--text-light)]">
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]">
+            <span className="text-5xl font-[family-name:var(--font-playfair)] text-[var(--gold)]">
               {business.name.charAt(0)}
             </span>
           </div>

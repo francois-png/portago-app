@@ -72,6 +72,7 @@ export default async function CategoryPage({
         </div>
       </section>
 
+      <div className="bg-[var(--warm-white)] min-h-screen">
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-12">
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Sidebar */}
@@ -142,6 +143,7 @@ export default async function CategoryPage({
             )}
           </div>
         </div>
+      </div>
       </div>
     </>
   );

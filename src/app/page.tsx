@@ -1,6 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Search, Star, Heart } from "lucide-react";
+
+const categoryImages: Record<string, string> = {
+  restaurants: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80",
+  architecture: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+  property: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80",
+  activities: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80",
+  wellness: "https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=600&q=80",
+  schools: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80",
+  shopping: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80",
+  transport: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80",
+  marinas: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600&q=80",
+  "home-garden": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80",
+  events: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80",
+};
+
+const areaImages: Record<string, string> = {
+  palma: "https://images.unsplash.com/photo-1577000867069-97cc1e6d9606?w=600&q=80",
+  soller: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+};
 import { createClient } from "@/lib/supabase/server";
 import { HeroRotator } from "@/components/HeroRotator";
 import { SearchBar } from "@/components/SearchBar";
@@ -87,8 +106,18 @@ export default async function Home() {
               href={`/category/${cat.slug}`}
               className="group relative h-[360px] rounded-[var(--radius)] overflow-hidden cursor-pointer"
             >
-              {/* Gradient placeholder bg */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]" />
+              {/* Background image */}
+              {categoryImages[cat.slug] ? (
+                <Image
+                  src={categoryImages[cat.slug]}
+                  alt={cat.name}
+                  fill
+                  className="object-cover group-hover:scale-[1.06] transition-transform duration-[600ms]"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]" />
+              )}
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,26,0.85)] via-transparent to-transparent z-10" />
               {/* Icon centered */}
@@ -174,6 +203,33 @@ export default async function Home() {
         />
       </section>
 
+      {/* How Portago Works */}
+      <section className="bg-[var(--cream)] py-24 px-5 md:px-10">
+        <div className="text-center mb-16">
+          <div className="section-tag">Simple & Elegant</div>
+          <h2 className="section-title">How Portago Works</h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-12 max-w-[900px] mx-auto text-center">
+          {[
+            { icon: Search, title: "Discover", desc: "Browse curated categories or search for exactly what you need across the island." },
+            { icon: Star, title: "Compare", desc: "Read verified reviews, check ratings, and find the best match for your taste." },
+            { icon: Heart, title: "Enjoy", desc: "Save your favourites, share with friends, and experience the best of Mallorca." },
+          ].map((step) => (
+            <div key={step.title} className="flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-[var(--sand)] flex items-center justify-center mb-6">
+                <step.icon size={32} className="text-[var(--gold)]" />
+              </div>
+              <h3 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-[var(--warm-dark)] mb-3">
+                {step.title}
+              </h3>
+              <p className="text-sm text-[var(--text-light)] font-light leading-relaxed max-w-[260px]">
+                {step.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Area guides */}
       {areas && areas.length > 0 && (
         <section className="bg-[var(--cream)] py-24 px-5 md:px-10 overflow-hidden">
@@ -194,10 +250,13 @@ export default async function Home() {
                 href={`/area/${area.slug}`}
                 className="group relative min-w-[240px] h-[320px] rounded-[var(--radius)] overflow-hidden flex-shrink-0"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-30">
-                  <MapPin size={48} className="text-[var(--gold)]" />
-                </div>
+                <Image
+                  src={areaImages[area.slug] || "https://images.unsplash.com/photo-1599533078316-657de79ea89f?w=600&q=80"}
+                  alt={area.name}
+                  fill
+                  className="object-cover group-hover:scale-[1.06] transition-transform duration-[600ms]"
+                  sizes="240px"
+                />
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/75 to-transparent">
                   <h4 className="font-[family-name:var(--font-playfair)] text-xl text-white font-semibold">
                     {area.name}

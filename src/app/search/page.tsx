@@ -59,6 +59,7 @@ export default async function SearchPage({
         </div>
       </section>
 
+      <div className="bg-[var(--warm-white)] min-h-screen">
       <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-12">
         {/* Category pills */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -126,6 +127,7 @@ export default async function SearchPage({
             <p className="text-lg font-light">No listings found. Try a different search.</p>
           </div>
         )}
+      </div>
       </div>
     </>
   );
