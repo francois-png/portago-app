@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export function WaitlistForm() {
@@ -33,25 +33,27 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3 w-full max-w-md">
+    <form
+      onSubmit={handleSubmit}
+      className="flex max-w-[480px] w-full bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.15)] rounded-full p-[5px] pl-6"
+    >
       <input
         type="email"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-        className="flex-1 px-4 py-3 rounded-lg border border-gray-200 bg-white text-[var(--text)] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]"
+        placeholder="Your email address"
+        className="flex-1 bg-transparent border-none outline-none text-white text-[15px] placeholder:text-[rgba(255,255,255,0.4)]"
       />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="bg-[var(--gold)] hover:bg-[var(--gold-dark)] text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center gap-2 disabled:opacity-50"
+        className="bg-[var(--gold)] text-white border-none px-7 py-3 rounded-full text-sm font-semibold hover:bg-[var(--terracotta)] transition-all disabled:opacity-50"
       >
-        Join
-        <ArrowRight size={16} />
+        Subscribe
       </button>
       {status === "error" && (
-        <p className="text-red-500 text-sm mt-1">Something went wrong. Please try again.</p>
+        <p className="text-red-400 text-sm mt-2 absolute">Something went wrong.</p>
       )}
     </form>
   );

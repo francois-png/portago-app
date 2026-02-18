@@ -31,13 +31,13 @@ export function ListBusinessForm() {
   if (status === "success") {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
-          <Check size={32} className="text-green-600" />
+        <div className="w-16 h-16 rounded-full bg-[var(--cream)] flex items-center justify-center mx-auto mb-4">
+          <Check size={32} className="text-[var(--gold)]" />
         </div>
-        <h3 className="text-xl font-semibold font-[family-name:var(--font-playfair)] text-[var(--dark)] mb-2">
+        <h3 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-[var(--warm-dark)] mb-2">
           Thank you
         </h3>
-        <p className="text-[var(--text-light)]">
+        <p className="text-[var(--text-light)] font-light">
           We have received your submission and will be in touch shortly.
         </p>
       </div>
@@ -45,13 +45,13 @@ export function ListBusinessForm() {
   }
 
   const inputClass =
-    "w-full px-4 py-3 rounded-lg border border-gray-200 bg-[var(--cream)] text-[var(--text)] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition";
+    "w-full px-5 py-3.5 rounded-xl border border-[var(--sand)] bg-[var(--warm-white)] text-[var(--text)] placeholder:text-[var(--text-light)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition font-light";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid md:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-[var(--text)] mb-1.5">
+          <label className="block text-sm font-medium text-[var(--text)] mb-2 tracking-wide">
             Business Name
           </label>
           <input
@@ -63,7 +63,7 @@ export function ListBusinessForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-[var(--text)] mb-1.5">
+          <label className="block text-sm font-medium text-[var(--text)] mb-2 tracking-wide">
             Contact Name
           </label>
           <input
@@ -77,7 +77,7 @@ export function ListBusinessForm() {
       </div>
       <div className="grid md:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-[var(--text)] mb-1.5">
+          <label className="block text-sm font-medium text-[var(--text)] mb-2 tracking-wide">
             Email
           </label>
           <input
@@ -89,7 +89,7 @@ export function ListBusinessForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-[var(--text)] mb-1.5">
+          <label className="block text-sm font-medium text-[var(--text)] mb-2 tracking-wide">
             Phone
           </label>
           <input
@@ -101,7 +101,7 @@ export function ListBusinessForm() {
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-[var(--text)] mb-1.5">
+        <label className="block text-sm font-medium text-[var(--text)] mb-2 tracking-wide">
           Category
         </label>
         <select
@@ -115,13 +115,13 @@ export function ListBusinessForm() {
           <option value="Wellness">Wellness</option>
           <option value="Property">Property</option>
           <option value="Shopping">Shopping</option>
-          <option value="Legal">Legal</option>
+          <option value="Architecture">Architecture</option>
           <option value="Transport">Transport</option>
           <option value="Other">Other</option>
         </select>
       </div>
       <div>
-        <label className="block text-sm font-medium text-[var(--text)] mb-1.5">
+        <label className="block text-sm font-medium text-[var(--text)] mb-2 tracking-wide">
           Tell us about your business
         </label>
         <textarea
@@ -134,7 +134,7 @@ export function ListBusinessForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full bg-[var(--gold)] hover:bg-[var(--gold-dark)] text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+        className="w-full bg-[var(--gold)] hover:bg-[var(--terracotta)] text-white py-4 rounded-full font-semibold tracking-[0.5px] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
       >
         <Send size={16} />
         Submit

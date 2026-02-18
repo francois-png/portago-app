@@ -1,21 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #FDF8F0;
   --gold: #C9A96E;
+  --gold-light: #E8D5B0;
   --gold-dark: #B8943F;
-  --dark: #1A1A2E;
-  --dark-light: #2D2D44;
-  --text: #333333;
-  --text-light: #666666;
+  --dark: #1A1A1A;
+  --warm-dark: #2C2418;
+  --cream: #FBF7F0;
+  --warm-white: #FFFCF7;
+  --sand: #F0E6D3;
+  --terracotta: #C4703F;
+  --olive: #6B7B4E;
+  --sea: #4A7C8A;
+  --text: #3D3427;
+  --text-light: #8A7E6E;
+  --radius: 16px;
 }
 
+* { box-sizing: border-box; }
+
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--cream);
+  font-family: var(--font-inter), 'Inter', -apple-system, sans-serif;
   color: var(--text);
+  background-color: var(--warm-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+}
+
+/* Section tag (uppercase gold label) */
+.section-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+}
+
+/* Section title */
+.section-title {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  color: var(--warm-dark);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: var(--text-light);
+  line-height: 1.7;
+  max-width: 520px;
+  font-weight: 300;
+}
+
+/* Pill button style */
+.pill-btn {
+  border-radius: 100px;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  cursor: pointer;
 }

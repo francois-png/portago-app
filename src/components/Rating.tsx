@@ -14,16 +14,16 @@ export function Rating({
         {[1, 2, 3, 4, 5].map((i) => (
           <Star
             key={i}
-            size={14}
+            size={13}
             className={
               i <= Math.round(rating)
                 ? "fill-[var(--gold)] text-[var(--gold)]"
-                : "text-gray-300"
+                : "text-[var(--sand)]"
             }
           />
         ))}
       </div>
-      <span className="text-sm text-[var(--text-light)]">
+      <span className="text-[13px] text-[var(--text-light)]">
         {rating.toFixed(1)}
         {reviewCount != null && ` (${reviewCount})`}
       </span>

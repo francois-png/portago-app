@@ -1,117 +1,75 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Menu, X } from "lucide-react";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const router = useRouter();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
-      setSearchOpen(false);
-      setQuery("");
-    }
-  };
 
   const navLinks = [
-    { href: "/category/restaurants", label: "Restaurants" },
-    { href: "/category/activities", label: "Activities" },
+    { href: "/", label: "Discover" },
+    { href: "/search", label: "Search" },
+    { href: "/category/restaurants", label: "Dining" },
     { href: "/category/wellness", label: "Wellness" },
     { href: "/category/property", label: "Property" },
   ];
 
   return (
-    <header className="bg-[var(--dark)] text-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="text-2xl font-bold font-[family-name:var(--font-playfair)]"
-        >
-          <span className="text-[var(--gold)]">Portago</span>
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-50 px-5 md:px-10 py-4 flex items-center justify-between bg-[rgba(255,252,247,0.85)] backdrop-blur-[20px] border-b border-[rgba(201,169,110,0.15)] transition-all duration-300">
+      <Link href="/">
+        <Image
+          src="/portago-logo-transparent.png"
+          alt="Portago"
+          width={120}
+          height={55}
+          className="h-[45px] w-auto"
+          priority
+        />
+      </Link>
 
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="hover:text-[var(--gold)] transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <button
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="hover:text-[var(--gold)] transition-colors"
-            aria-label="Search"
-          >
-            <Search size={18} />
-          </button>
+      <nav className="hidden lg:flex items-center gap-8">
+        {navLinks.map((link) => (
           <Link
-            href="/list-your-business"
-            className="bg-[var(--gold)] hover:bg-[var(--gold-dark)] text-white px-5 py-2 rounded-lg font-semibold transition-colors text-sm"
+            key={link.href}
+            href={link.href}
+            className="text-[13px] font-medium text-[var(--text-light)] tracking-[0.5px] uppercase hover:text-[var(--gold)] transition-colors no-underline"
           >
-            List Your Business
+            {link.label}
           </Link>
-        </nav>
-
-        <button
-          className="lg:hidden hover:text-[var(--gold)]"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+        ))}
+        <Link
+          href="/list-your-business"
+          className="bg-[var(--warm-dark)] text-white px-6 py-2.5 rounded-full text-[13px] font-medium tracking-[0.8px] uppercase hover:bg-[var(--gold)] transition-all no-underline"
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+          List Your Business
+        </Link>
+      </nav>
 
-      {searchOpen && (
-        <div className="border-t border-gray-700 py-3 px-4 max-w-7xl mx-auto">
-          <form onSubmit={handleSearch} className="relative">
-            <Search
-              size={18}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-            />
-            <input
-              type="text"
-              autoFocus
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search listings..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[var(--dark-light)] text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]"
-            />
-          </form>
-        </div>
-      )}
+      <button
+        className="lg:hidden text-[var(--warm-dark)] hover:text-[var(--gold)]"
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle menu"
+      >
+        {open ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
       {open && (
-        <nav className="lg:hidden border-t border-gray-700 px-4 py-4 space-y-3">
+        <nav className="absolute top-full left-0 right-0 bg-[rgba(255,252,247,0.95)] backdrop-blur-[20px] border-b border-[rgba(201,169,110,0.15)] px-5 py-6 space-y-4 lg:hidden">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block hover:text-[var(--gold)] transition-colors"
+              className="block text-sm font-medium text-[var(--text-light)] uppercase tracking-wider hover:text-[var(--gold)] transition-colors"
               onClick={() => setOpen(false)}
             >
               {link.label}
             </Link>
           ))}
           <Link
-            href="/search"
-            className="block hover:text-[var(--gold)] transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Search
-          </Link>
-          <Link
             href="/list-your-business"
-            className="block bg-[var(--gold)] hover:bg-[var(--gold-dark)] text-white px-5 py-2 rounded-lg font-semibold transition-colors text-sm text-center"
+            className="block bg-[var(--warm-dark)] text-white text-center px-6 py-2.5 rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[var(--gold)] transition-all"
             onClick={() => setOpen(false)}
           >
             List Your Business

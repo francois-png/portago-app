@@ -1,10 +1,9 @@
 "use client";
 
-import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function SearchBar({ className = "" }: { className?: string }) {
+export function SearchBar({ variant = "hero" }: { variant?: "hero" | "page" }) {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
@@ -15,19 +14,47 @@ export function SearchBar({ className = "" }: { className?: string }) {
     }
   };
 
+  if (variant === "hero") {
+    return (
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center bg-[rgba(255,255,255,0.12)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.15)] rounded-full max-w-[600px] mx-auto p-[6px] pl-7 focus-within:bg-[rgba(255,255,255,0.18)] focus-within:border-[rgba(201,169,110,0.5)] transition-all"
+      >
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search restaurants, architects, wellness..."
+          className="flex-1 bg-transparent border-none outline-none text-base text-white font-light placeholder:text-[rgba(255,255,255,0.5)]"
+        />
+        <button
+          type="submit"
+          className="bg-[var(--gold)] text-white border-none px-8 py-3.5 rounded-full text-sm font-semibold tracking-[0.5px] hover:bg-[var(--terracotta)] hover:scale-[1.02] transition-all"
+        >
+          Explore
+        </button>
+      </form>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className={`relative ${className}`}>
-      <Search
-        size={18}
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-light)]"
-      />
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center bg-[rgba(255,255,255,0.12)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.15)] rounded-full max-w-[600px] mx-auto p-[6px] pl-7 focus-within:bg-[rgba(255,255,255,0.18)] focus-within:border-[rgba(201,169,110,0.5)] transition-all"
+    >
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search restaurants, activities, services..."
-        className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-[var(--text)] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold)] focus:border-transparent transition"
+        placeholder="Search listings..."
+        className="flex-1 bg-transparent border-none outline-none text-base text-white font-light placeholder:text-[rgba(255,255,255,0.5)]"
       />
+      <button
+        type="submit"
+        className="bg-[var(--gold)] text-white border-none px-8 py-3.5 rounded-full text-sm font-semibold tracking-[0.5px] hover:bg-[var(--terracotta)] hover:scale-[1.02] transition-all"
+      >
+        Search
+      </button>
     </form>
   );
 }

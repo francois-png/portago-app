@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Search, MapPin, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, MapPin } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { HeroRotator } from "@/components/HeroRotator";
 import { SearchBar } from "@/components/SearchBar";
@@ -17,79 +18,113 @@ export default async function Home() {
       .select("*")
       .eq("status", "active")
       .order("rating", { ascending: false })
-      .limit(6),
+      .limit(3),
     supabase.from("areas").select("*").limit(8),
   ]);
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-[var(--dark)] text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--dark)] via-[var(--dark-light)] to-[var(--dark)] opacity-90" />
-        <div className="relative max-w-7xl mx-auto px-4 py-24 md:py-36 lg:py-44">
+      {/* Hero — full viewport with video bg */}
+      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]">
+        <video
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(44,36,24,0.4)] to-[rgba(26,26,26,0.7)]" />
+        <div className="relative z-10 text-center max-w-[800px] px-6">
+          <Image
+            src="/portago-logo-transparent.png"
+            alt="Portago"
+            width={360}
+            height={180}
+            className="h-[140px] md:h-[180px] w-auto mx-auto mb-7"
+            priority
+          />
+          <div className="inline-block text-xs font-semibold tracking-[3px] uppercase text-[var(--gold)] mb-6 px-5 py-2 border border-[rgba(201,169,110,0.4)] rounded-full">
+            Your Guide to Mallorca Living
+          </div>
           <HeroRotator />
-          <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl">
-            Discover the finest restaurants, experiences, and services across the island.
-            Curated for those who appreciate the extraordinary.
+          <p className="text-lg text-[rgba(255,255,255,0.75)] leading-relaxed max-w-[560px] mx-auto mb-10 font-light">
+            The definitive directory for discerning residents and visitors. Curated restaurants,
+            trusted services, beautiful spaces — all in one place.
           </p>
-          <div className="mt-10 max-w-xl">
-            <SearchBar />
+          <SearchBar variant="hero" />
+          <div className="mt-8 flex gap-4 justify-center flex-wrap text-[13px] text-[rgba(255,255,255,0.55)]">
+            <Link href="/category/restaurants" className="hover:text-[var(--gold)] transition-colors">Restaurants</Link>
+            <span>·</span>
+            <Link href="/category/architecture" className="hover:text-[var(--gold)] transition-colors">Architecture</Link>
+            <span>·</span>
+            <Link href="/category/wellness" className="hover:text-[var(--gold)] transition-colors">Wellness</Link>
+            <span>·</span>
+            <Link href="/category/property" className="hover:text-[var(--gold)] transition-colors">Property</Link>
+            <span>·</span>
+            <Link href="/category/schools" className="hover:text-[var(--gold)] transition-colors">Schools</Link>
           </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] text-[var(--dark)]">
-            Explore by Category
+      {/* Categories — image cards */}
+      <section className="bg-[var(--cream)] py-24 px-5 md:px-10">
+        <div className="text-center mb-14">
+          <div className="section-tag">Explore by Category</div>
+          <h2 className="section-title">
+            Everything Mallorca,<br />beautifully curated
           </h2>
-          <p className="mt-3 text-[var(--text-light)] max-w-lg mx-auto">
-            From world-class dining to island adventures, find exactly what you are looking for.
+          <p className="section-sub mx-auto">
+            From sunset restaurants to world-class architects — discover the island&apos;s finest,
+            vetted and reviewed by locals who know.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1200px] mx-auto">
           {(categories as Category[])?.map((cat) => (
             <Link
               key={cat.id}
               href={`/category/${cat.slug}`}
-              className="group flex flex-col items-center gap-3 p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+              className="group relative h-[360px] rounded-[var(--radius)] overflow-hidden cursor-pointer"
             >
-              <div className="w-12 h-12 rounded-full bg-[var(--cream)] flex items-center justify-center group-hover:bg-[var(--gold)] transition-colors">
-                <CategoryIcon
-                  slug={cat.slug}
-                  size={22}
-                  className="text-[var(--gold)] group-hover:text-white transition-colors"
-                />
+              {/* Gradient placeholder bg */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]" />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(26,26,26,0.85)] via-transparent to-transparent z-10" />
+              {/* Icon centered */}
+              <div className="absolute inset-0 flex items-center justify-center z-[5] opacity-30 group-hover:opacity-40 transition-opacity">
+                <CategoryIcon slug={cat.slug} size={80} className="text-[var(--gold)]" />
               </div>
-              <span className="font-semibold text-[var(--dark)] text-sm text-center">
-                {cat.name}
-              </span>
+              {/* Info */}
+              <div className="absolute bottom-0 left-0 right-0 p-7 z-20">
+                <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-white mb-1">
+                  {cat.name}
+                </h3>
+                {cat.description && (
+                  <p className="text-sm text-[rgba(255,255,255,0.7)] font-light">{cat.description}</p>
+                )}
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Featured */}
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between mb-12">
+      {/* Featured listings */}
+      <section className="bg-[var(--warm-white)] py-24 px-5 md:px-10">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex items-end justify-between mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] text-[var(--dark)]">
-                Top Rated
-              </h2>
-              <p className="mt-2 text-[var(--text-light)]">
-                The highest-rated places across Mallorca
-              </p>
+              <div className="section-tag">Editor&apos;s Picks</div>
+              <h2 className="section-title">Featured this week</h2>
             </div>
             <Link
               href="/search"
-              className="hidden md:flex items-center gap-2 text-[var(--gold)] hover:text-[var(--gold-dark)] font-semibold transition-colors"
+              className="hidden md:flex items-center gap-1.5 text-sm font-medium text-[var(--gold)] tracking-[0.5px] uppercase hover:text-[var(--terracotta)] transition-colors"
             >
-              View all <ArrowRight size={16} />
+              View all <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {(featured as (Business & { area: Area | null })[])?.map((biz) => (
               <BusinessCard
                 key={biz.id}
@@ -102,72 +137,79 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] text-[var(--dark)]">
-            How Portago Works
+      {/* Lifestyle banner */}
+      <section className="bg-[var(--warm-dark)] grid grid-cols-1 md:grid-cols-2 min-h-[500px] overflow-hidden">
+        <div className="p-12 md:p-16 flex flex-col justify-center">
+          <div className="section-tag">Why Mallorca</div>
+          <h2 className="section-title !text-white">
+            300 days of sunshine.<br />A lifetime of stories.
           </h2>
-        </div>
-        <div className="grid md:grid-cols-3 gap-10">
-          {[
-            {
-              icon: Search,
-              title: "Discover",
-              desc: "Browse curated categories or search for exactly what you need across Mallorca.",
-            },
-            {
-              icon: MapPin,
-              title: "Explore",
-              desc: "Read reviews, view photos, and find the perfect spot for any occasion.",
-            },
-            {
-              icon: Sparkles,
-              title: "Experience",
-              desc: "Visit with confidence, knowing every listing has been vetted for quality.",
-            },
-          ].map((step, i) => (
-            <div key={i} className="text-center">
-              <div className="w-16 h-16 rounded-full bg-[var(--cream)] flex items-center justify-center mx-auto mb-5">
-                <step.icon size={28} className="text-[var(--gold)]" />
+          <p className="section-sub !text-[rgba(255,255,255,0.65)]">
+            Mallorca isn&apos;t just a destination — it&apos;s a way of living. World-class dining,
+            ancient culture, mountain trails, crystal coves, and a community of people who chose the good life.
+          </p>
+          <div className="grid grid-cols-3 gap-6 mt-10">
+            {[
+              { num: "300+", label: "Sunny days a year" },
+              { num: "18°C", label: "Average temperature" },
+              { num: "262", label: "Beaches to explore" },
+            ].map((s) => (
+              <div key={s.num}>
+                <h4 className="font-[family-name:var(--font-playfair)] text-4xl text-[var(--gold)] font-semibold">
+                  {s.num}
+                </h4>
+                <p className="text-[13px] text-[rgba(255,255,255,0.5)] mt-1 tracking-[0.5px]">
+                  {s.label}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold font-[family-name:var(--font-playfair)] text-[var(--dark)] mb-2">
-                {step.title}
-              </h3>
-              <p className="text-[var(--text-light)] leading-relaxed">
-                {step.desc}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        <div
+          className="hidden md:block bg-cover bg-center min-h-[300px]"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1599533078316-657de79ea89f?w=960&q=80')",
+          }}
+        />
       </section>
 
-      {/* Areas */}
+      {/* Area guides */}
       {areas && areas.length > 0 && (
-        <section className="bg-white py-20">
-          <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-playfair)] text-[var(--dark)] text-center mb-12">
-              Explore by Area
+        <section className="bg-[var(--cream)] py-24 px-5 md:px-10 overflow-hidden">
+          <div className="text-center mb-14">
+            <div className="section-tag">Area Guides</div>
+            <h2 className="section-title">
+              Find your corner<br />of the island
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {(areas as Area[]).map((area) => (
-                <Link
-                  key={area.id}
-                  href={`/area/${area.slug}`}
-                  className="group relative p-6 bg-[var(--cream)] rounded-lg hover:bg-[var(--dark)] transition-colors"
-                >
-                  <div className="flex items-center gap-2">
-                    <MapPin
-                      size={16}
-                      className="text-[var(--gold)]"
-                    />
-                    <span className="font-semibold text-[var(--dark)] group-hover:text-white transition-colors">
-                      {area.name}
+            <p className="section-sub mx-auto">
+              From Palma&apos;s vibrant old town to the dramatic Serra de Tramuntana — every area tells its own story.
+            </p>
+          </div>
+          <div className="flex gap-5 overflow-x-auto max-w-[1200px] mx-auto pb-5 scrollbar-hide"
+               style={{ scrollbarWidth: "none" }}>
+            {(areas as Area[]).map((area) => (
+              <Link
+                key={area.id}
+                href={`/area/${area.slug}`}
+                className="group relative min-w-[240px] h-[320px] rounded-[var(--radius)] overflow-hidden flex-shrink-0"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--warm-dark)] to-[var(--dark)]" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                  <MapPin size={48} className="text-[var(--gold)]" />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/75 to-transparent">
+                  <h4 className="font-[family-name:var(--font-playfair)] text-xl text-white font-semibold">
+                    {area.name}
+                  </h4>
+                  {area.description && (
+                    <span className="text-xs text-[rgba(255,255,255,0.6)] font-light">
+                      {area.description}
                     </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  )}
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       )}

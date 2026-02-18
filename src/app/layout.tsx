@@ -17,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Portago — Your Guide to the Best of Puerto Portals & Portals Nous",
+  title: "Portago — Mallorca Living, Elevated",
   description:
-    "Discover restaurants, services, and experiences in Puerto Portals and Portals Nous, Mallorca.",
+    "The definitive lifestyle directory for Mallorca. Curated restaurants, trusted services, beautiful spaces — all in one place.",
 };
 
 export default function RootLayout({
@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="antialiased">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
